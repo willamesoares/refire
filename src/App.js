@@ -4,9 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Redirect,
-} from "react-router-dom";
-import Login from './pages/Login';
+} from 'react-router-dom';
+
 import { auth } from './services/firebase';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 import './App.css';
 
@@ -39,7 +41,8 @@ function App() {
   return isLoading ? <h2>Loading...</h2> : (
     <Router>
       <Switch>
-        <PublicRoute path="/login" authenticated={isAuthenticated} component={Login} />
+        <PublicRoute path='/login' authenticated={isAuthenticated} component={Login} />
+        <PublicRoute path='/signup' authenticated={isAuthenticated} component={Signup} />
       </Switch>
     </Router>
   );

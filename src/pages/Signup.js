@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signin } from '../helpers/auth';
 
-const Login = () => {
+import { signup } from '../helpers/auth';
+
+const Signup = () => {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +12,7 @@ const Login = () => {
     event.preventDefault();
     setError(null);
     try {
-      await signin(email, password);
+      await signup(email, password);
     } catch (error) {
       setError(error.message);
     }
@@ -19,19 +20,12 @@ const Login = () => {
 
   return (
     <div>
-      <form
-        autoComplete='off'
-        onSubmit={ handleSubmit }
-      >
+      <form onSubmit={ handleSubmit }>
         <h1>
-          Login to
-          <Link to='/'>
-            Refire
-          </Link>
+          Sign Up to
+        <Link to='/'>Refire</Link>
         </h1>
-        <p>
-          Fill in the form below to login to your account.
-        </p>
+        <p>Fill in the form below to create an account.</p>
         <div>
           <input
             placeholder='Email'
@@ -51,15 +45,13 @@ const Login = () => {
           />
         </div>
         <div>
-          { error ? (
-            <p>{ error }</p>
-          ) : null }
-          <button type='submit'>Login</button>
+          { error ? <p>{ error }</p> : null }
+          <button type='submit'>Sign up</button>
         </div>
-        <p>Don't have an account? <Link to='/signup'>Signup</Link></p>
+        <p>Already have an account? <Link to='/login'>Login</Link></p>
       </form>
     </div>
   );
-};
+}
 
-export default Login;
+export default Signup;
