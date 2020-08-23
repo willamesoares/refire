@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { auth } from './services/firebase';
+import Header from './components/Header';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -51,25 +52,28 @@ function App() {
   }, []);
 
   return isLoading ? <h2>Loading...</h2> : (
-    <Router>
-      <Switch>
-        <PrivateRoute
-          path='/chat'
-          authenticated={ isAuthenticated }
-          component={ Chat }
-        />
-        <PublicRoute
-          path='/login'
-          authenticated={ isAuthenticated }
-          component={ Login }
-        />
-        <PublicRoute
-          path='/signup'
-          authenticated={ isAuthenticated }
-          component={ Signup }
-        />
-      </Switch>
-    </Router>
+    <div>
+      { isAuthenticated ? <Header /> : null }
+      <Router>
+        <Switch>
+          <PrivateRoute
+            path='/chat'
+            authenticated={ isAuthenticated }
+            component={ Chat }
+          />
+          <PublicRoute
+            path='/login'
+            authenticated={ isAuthenticated }
+            component={ Login }
+          />
+          <PublicRoute
+            path='/signup'
+            authenticated={ isAuthenticated }
+            component={ Signup }
+          />
+        </Switch>
+      </Router>
+    </div>
   );
 };
 

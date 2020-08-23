@@ -5,6 +5,8 @@ import { signup, signInWithGoogle } from '../helpers/auth';
 
 const Signup = () => {
   const [error, setError] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,7 +14,7 @@ const Signup = () => {
     event.preventDefault();
     setError(null);
     try {
-      await signup(email, password);
+      await signup(email, password, firstName, lastName);
     } catch (error) {
       setError(error.message);
     }
@@ -36,6 +38,24 @@ const Signup = () => {
         <p>Fill in the form below to create an account.</p>
         <div>
           <input
+            placeholder='First Name'
+            name='firstName'
+            type='text'
+            onChange={ event => setFirstName(event.target.value) }
+            value={ firstName }
+          />
+        </div>
+        <div>
+          <input
+            placeholder='Last Name'
+            name='lastName'
+            type='text'
+            onChange={ event => setLastName(event.target.value) }
+            value={ lastName }
+          />
+        </div>
+        <div>
+          <input
             placeholder='Email'
             name='email'
             type='email'
@@ -54,7 +74,12 @@ const Signup = () => {
         </div>
         <div>
           { error ? <p>{ error }</p> : null }
-          <button type='submit'>Sign up</button>
+          <button
+            type='submit'
+            disabled={ !(firstName && lastName && email && password) }
+          >
+            Sign up
+          </button>
           <p>Or</p>
           <button onClick={ googleSignIn } type="button">
             Sign up with Google

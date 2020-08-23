@@ -1,0 +1,34 @@
+.Chat {
+  margin: 0 auto;
+  width: 80vw;
+}
+
+.Chat-content {
+  display: flex;
+  margin: 3rem auto 4.5rem;
+  max-width: 80vw;
+  flex-direction: column;
+}
+
+.Chat-message {
+  border-radius: .3rem;
+  padding: .5rem;
+  margin-top: 1rem;
+  max-width: 50%;
+}
+
+.Chat-form {
+  bottom: 1rem;
+  position: fixed;
+  height: 3rem;
+  width: 80vw;
+  display: flex;
+}
+
+.Chat-input {
+  flex-grow: 3;
+}
+
+.Chat-button {
+  flex-grow: 1;
+}

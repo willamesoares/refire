@@ -1,0 +1,17 @@
+.Header {
+  background-color: #ffcb2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.Header p {
+  margin-left: 1rem;
+}
+
+.Header button {
+  margin-right: 1rem;
+}
