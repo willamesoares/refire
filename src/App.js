@@ -7,12 +7,24 @@ import {
 } from 'react-router-dom';
 
 import { auth } from './services/firebase';
+import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 import './App.css';
 
-function PublicRoute({ component: Component, authenticated, ...rest }) {
+const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+    />
+  )
+}
+
+const PublicRoute = ({ component: Component, authenticated, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -41,8 +53,21 @@ function App() {
   return isLoading ? <h2>Loading...</h2> : (
     <Router>
       <Switch>
-        <PublicRoute path='/login' authenticated={isAuthenticated} component={Login} />
-        <PublicRoute path='/signup' authenticated={isAuthenticated} component={Signup} />
+        <PrivateRoute
+          path='/chat'
+          authenticated={ isAuthenticated }
+          component={ Chat }
+        />
+        <PublicRoute
+          path='/login'
+          authenticated={ isAuthenticated }
+          component={ Login }
+        />
+        <PublicRoute
+          path='/signup'
+          authenticated={ isAuthenticated }
+          component={ Signup }
+        />
       </Switch>
     </Router>
   );
