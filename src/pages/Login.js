@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { signin, signInWithGoogle } from '../helpers/auth';
 
+import '../styles/Login.css';
+
 const Login = () => {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
@@ -27,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='Login'>
       <form
         autoComplete='off'
         onSubmit={ handleSubmit }
@@ -35,23 +37,20 @@ const Login = () => {
         <h1>
           Login to
           <Link to='/'>
-            Refire
+            Refire Chat
           </Link>
         </h1>
-        <p>
-          Fill in the form below to login to your account.
-        </p>
-        <div>
+        <div className='Login-inputs'>
           <input
+            className='Login-input'
             placeholder='Email'
             name='email'
             type='email'
             onChange={ event => setEmail(event.target.value) }
             value={ email }
           />
-        </div>
-        <div>
           <input
+            className='Login-input'
             placeholder='Password'
             name='password'
             onChange={ event => setPassword(event.target.value) }
@@ -59,14 +58,22 @@ const Login = () => {
             type='password'
           />
         </div>
-        <div>
+        <div className='Login-buttons'>
           { error ? (
             <p>{ error }</p>
           ) : null }
-          <button type='submit'>Login</button>
-          <p>Or</p>
-          <button onClick={ googleSignIn } type="button">
-            Sign in with Google
+          <button
+            className='Login-button'
+            type='submit'
+          >
+            Login
+          </button>
+          <button
+            className='Login-button'
+            onClick={ googleSignIn }
+            type="button"
+          >
+            Sign in with <img src='./google.png' alt='google' />
           </button>
         </div>
         <p>Don't have an account? <Link to='/signup'>Signup</Link></p>
