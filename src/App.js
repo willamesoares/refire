@@ -8,6 +8,7 @@ import {
 
 import { auth } from './services/firebase';
 import Header from './components/Header';
+import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -56,6 +57,12 @@ function App() {
       { isAuthenticated ? <Header /> : null }
       <Router>
         <Switch>
+          <PublicRoute
+            exact
+            path='/'
+            authenticated={ isAuthenticated }
+            component={ Home }
+          />
           <PrivateRoute
             path='/chat'
             authenticated={ isAuthenticated }

@@ -1,0 +1,51 @@
+.Home {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: repeating-linear-gradient(
+    45deg,
+    #ffcb2d,
+    #ffcb2d 50vw,
+    #61dafb 50vw,
+    #61dafb
+  );
+}
+
+.Home h1 {
+  margin-top: 20vh;
+}
+
+.Home-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.Home-buttons button {
+  width: 9rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  background: none;
+  border-radius: .3rem;
+  border: .01rem solid black;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.Home-buttons a {
+  text-decoration: none;
+  color: black;
+}
+
+.Home-buttons button:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 0px gray;
+}
+
+.Home-buttons a:first-child {
+  margin-right: 1rem;
+}
