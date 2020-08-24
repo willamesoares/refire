@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { signup, signInWithGoogle } from '../helpers/auth';
 
+import '../styles/Singup.css';
+import '../styles/Form.css';
+
 const Signup = () => {
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -29,42 +32,38 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={ handleSubmit }>
+    <div className='Signup'>
+      <form className='Form' onSubmit={ handleSubmit }>
         <h1>
-          Sign Up to
-        <Link to='/'>Refire</Link>
+          Sign up to <Link to='/'>Refire Chat</Link>
         </h1>
-        <p>Fill in the form below to create an account.</p>
-        <div>
+        <div className='Form-inputs'>
           <input
+            className='Form-input'
             placeholder='First Name'
             name='firstName'
             type='text'
             onChange={ event => setFirstName(event.target.value) }
             value={ firstName }
           />
-        </div>
-        <div>
           <input
+            className='Form-input'
             placeholder='Last Name'
             name='lastName'
             type='text'
             onChange={ event => setLastName(event.target.value) }
             value={ lastName }
           />
-        </div>
-        <div>
           <input
+            className='Form-input'
             placeholder='Email'
             name='email'
             type='email'
             onChange={ event => setEmail(event.target.value) }
             value={ email }
           />
-        </div>
-        <div>
           <input
+            className='Form-input'
             placeholder='Password'
             name='password'
             onChange={ event => setPassword(event.target.value) }
@@ -72,19 +71,23 @@ const Signup = () => {
             type='password'
           />
         </div>
-        <div>
-          { error ? <p>{ error }</p> : null }
+        <div className='Form-buttons'>
           <button
+            className='Form-button'
             type='submit'
             disabled={ !(firstName && lastName && email && password) }
           >
             Sign up
           </button>
-          <p>Or</p>
-          <button onClick={ googleSignIn } type="button">
-            Sign up with Google
+          <button
+            className='Form-button'
+            onClick={ googleSignIn }
+            type="button"
+          >
+            Sign up with <img src='./google.png' alt='google' />
           </button>
         </div>
+        { error ? <p className='Form-error'>{ error }</p> : null }
         <p>Already have an account? <Link to='/login'>Login</Link></p>
       </form>
     </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { signin, signInWithGoogle } from '../helpers/auth';
 
 import '../styles/Login.css';
+import '../styles/Form.css';
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -30,19 +31,13 @@ const Login = () => {
 
   return (
     <div className='Login'>
-      <form
-        autoComplete='off'
-        onSubmit={ handleSubmit }
-      >
+      <form className='Form' onSubmit={ handleSubmit }>
         <h1>
-          Login to
-          <Link to='/'>
-            Refire Chat
-          </Link>
+          Login to <Link to='/'>Refire Chat</Link>
         </h1>
-        <div className='Login-inputs'>
+        <div className='Form-inputs'>
           <input
-            className='Login-input'
+            className='Form-input'
             placeholder='Email'
             name='email'
             type='email'
@@ -50,7 +45,7 @@ const Login = () => {
             value={ email }
           />
           <input
-            className='Login-input'
+            className='Form-input'
             placeholder='Password'
             name='password'
             onChange={ event => setPassword(event.target.value) }
@@ -58,24 +53,23 @@ const Login = () => {
             type='password'
           />
         </div>
-        <div className='Login-buttons'>
-          { error ? (
-            <p>{ error }</p>
-          ) : null }
+        <div className='Form-buttons'>
           <button
-            className='Login-button'
+            className='Form-button'
             type='submit'
+            disabled={ !(email && password) }
           >
             Login
           </button>
           <button
-            className='Login-button'
+            className='Form-button'
             onClick={ googleSignIn }
             type="button"
           >
             Sign in with <img src='./google.png' alt='google' />
           </button>
         </div>
+        { error ? <p className='Form-error'>{ error }</p> : null }
         <p>Don't have an account? <Link to='/signup'>Signup</Link></p>
       </form>
     </div>
