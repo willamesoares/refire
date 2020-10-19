@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Button from '../components/Button';
+import Form from '../components/Form';
 import { signin, signInWithGoogle } from '../helpers/auth';
 
 import '../styles/Login.css';
-import '../styles/Form.css';
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -31,47 +32,41 @@ const Login = () => {
 
   return (
     <div className='Login'>
-      <form className='Form' onSubmit={ handleSubmit }>
-        <h1>
-          Login to <Link to='/'>Refire Chat</Link>
-        </h1>
-        <div className='Form-inputs'>
+      <h1>Refire Chat</h1>
+      <Form
+        onSubmitHandler={ handleSubmit }
+        error={ error }
+        inputs={[
           <input
-            className='Form-input'
             placeholder='Email'
             name='email'
             type='email'
             onChange={ event => setEmail(event.target.value) }
             value={ email }
-          />
+          />,
           <input
-            className='Form-input'
             placeholder='Password'
             name='password'
             onChange={ event => setPassword(event.target.value) }
             value={ password }
             type='password'
           />
-        </div>
-        <div className='Form-buttons'>
-          <button
-            className='Form-button'
+        ]}
+        buttons={[
+          <Button
+            text='Log In'
             type='submit'
             disabled={ !(email && password) }
-          >
-            Login
-          </button>
-          <button
-            className='Form-button'
+          />,
+          <Button
             onClick={ googleSignIn }
             type="button"
           >
             Sign in with <img src='./google.png' alt='google' />
-          </button>
-        </div>
-        { error ? <p className='Form-error'>{ error }</p> : null }
-        <p>Don't have an account? <Link to='/signup'>Signup</Link></p>
-      </form>
+          </Button>
+        ]}
+      />
+      <p>Don't have an account? <Link to='/signup'>Signup</Link></p>
     </div>
   );
 };

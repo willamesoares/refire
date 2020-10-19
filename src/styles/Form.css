@@ -1,5 +1,5 @@
 .Form {
-  width: 22rem;
+  width: 20rem;
   padding: 0 1rem;
 }
 
@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.Form-input {
+.Form-inputs input {
   box-sizing: border-box;
   height: 2.5rem;
   padding: 0 .5rem;
@@ -20,26 +20,11 @@
   justify-content: space-around;
 }
 
-.Form-button {
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  border-radius: .3rem;
-  box-shadow: gray 1 1 1;
-  border: none;
-  padding: .3rem 1rem;
-  cursor: pointer;
-}
-
-.Form-button:not(:disabled):hover {
-  box-shadow: 1px 1px 2px 0px gray;
-}
-
-.Form-button:disabled {
+.Form-buttons button:disabled {
   cursor: not-allowed;
 }
 
-.Form-button:first-child {
+.Form-buttons button:first-child {
   background-color: #ffcb2d;
   flex-grow: 2;
   font-size: 1rem;
@@ -48,7 +33,7 @@
   justify-content: center;
 }
 
-.Form-button img {
+.Form-buttons button img {
   margin-left: .3rem;
   width: 1rem;
 }

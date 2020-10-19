@@ -7,9 +7,8 @@ import {
 } from 'react-router-dom';
 
 import { auth } from './services/firebase';
-import Header from './components/Header';
-import Home from './pages/Home';
 import Chat from './pages/Chat';
+import Header from './components/Header';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
@@ -18,21 +17,21 @@ import './App.css';
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
   return (
     <Route
-      {...rest}
-      render={(props) => authenticated === true
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+      { ...rest }
+      render={(props) => authenticated ? <Component {...props} /> :
+        <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+      }
     />
-  )
-}
+  );
+};
 
 const PublicRoute = ({ component: Component, authenticated, ...rest }) => {
   return (
     <Route
-      {...rest}
-      render={(props) => authenticated === false
-        ? <Component {...props} />
-        : <Redirect to='/chat' />}
+      { ...rest }
+      render={ (props) => authenticated ? <Redirect to='/chat' /> :
+        <Component {...props} />
+      }
     />
   );
 };
@@ -42,18 +41,15 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    auth().onAuthStateChanged((user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
+    auth().onAuthStateChanged(user => {
+      console.log({ user });
+      setIsAuthenticated(!!user);
       setIsLoading(false);
     });
   }, []);
 
-  return isLoading ? <h2>Loading...</h2> : (
-    <div>
+  return !isLoading ? (
+    <div className="App">
       { isAuthenticated ? <Header /> : null }
       <Router>
         <Switch>
@@ -61,7 +57,7 @@ function App() {
             exact
             path='/'
             authenticated={ isAuthenticated }
-            component={ Home }
+            component={ Login }
           />
           <PrivateRoute
             path='/chat'
@@ -81,7 +77,7 @@ function App() {
         </Switch>
       </Router>
     </div>
-  );
+  ) : null;
 };
 
 export default App;

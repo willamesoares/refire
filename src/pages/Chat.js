@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { auth } from '../services/firebase';
 import { db } from '../services/firebase';
+
+import Button from '../components/Button';
+import Form from '../components/Form';
 
 import '../styles/Chat.css';
 
@@ -10,6 +13,7 @@ const Chat = () => {
   const [content, setContent] = useState('');
   const [readError, setReadError] = useState(null);
   const [writeError, setWriteError] = useState(null);
+  const chatContentRef = useRef(null);
 
   const user = auth().currentUser;
   useEffect(() => {
@@ -21,11 +25,27 @@ const Chat = () => {
           newChats.push(snap.val());
         });
         setChats(newChats);
+        scrollToLatestMessage();
       });
     } catch (error) {
       setReadError(error.message);
     }
   }, []);
+
+  const scrollToLatestMessage = () => {
+    const {
+      current: {
+        scrollTop,
+        scrollHeight
+      } = {}
+    } = chatContentRef || {};
+
+    if (!chatContentRef || !chatContentRef.current || (scrollTop === scrollHeight)) {
+      return;
+    }
+
+    chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,7 +62,7 @@ const Chat = () => {
         userDisplayName: user.displayName
       });
       setContent('');
-      window.scrollTo(0, document.body.scrollHeight);
+      scrollToLatestMessage();
     } catch (error) {
       setWriteError(error.message);
     }
@@ -50,7 +70,7 @@ const Chat = () => {
 
   return (
     <div className='Chat'>
-      <div className='Chat-content'>
+      <div className='Chat-content' ref={chatContentRef}>
         { chats.map(chat => {
           return (
             <div
@@ -58,7 +78,9 @@ const Chat = () => {
               style={{
                 ...(user.uid === chat.uid ? {
                   alignSelf: 'flex-end',
-                  backgroundColor: '#79afe6'
+                  backgroundColor: '#79afe6',
+                  marginRight: '0.5rem',
+                  textAlign: 'right'
                 } : {
                   alignSelf: 'flex-start',
                   backgroundColor: '#babfc5'
@@ -75,16 +97,16 @@ const Chat = () => {
           )
         }) }
       </div>
-      <form className='Chat-form' onSubmit={ handleSubmit }>
+      <Form
+        onSubmitHandler={ handleSubmit }
+        error={ readError || writeError }
+      >
         <input
-          className='Chat-input'
           onChange={ event => setContent(event.target.value) }
           value={ content }
         />
-        { readError ? <p>{ readError }</p> : null }
-        { writeError ? <p>{ writeError }</p> : null }
-        <button className='Chat-button' type='submit'>Send</button>
-      </form>
+        <Button type='submit' text='Send' />
+      </Form>
     </div>
   );
 };

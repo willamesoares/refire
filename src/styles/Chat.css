@@ -1,13 +1,19 @@
 .Chat {
-  margin: 0 auto;
-  width: 80vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: .3rem;
+  padding: 5rem 1rem 1rem;
+  justify-content: space-between;
+  width: 50rem;
 }
 
 .Chat-content {
   display: flex;
-  margin: 3rem auto 4.5rem;
-  max-width: 80vw;
   flex-direction: column;
+  overflow-y: auto;
+  margin-bottom: 1rem;
 }
 
 .Chat-message {
@@ -15,20 +21,33 @@
   padding: .5rem;
   margin-top: 1rem;
   max-width: 50%;
+  min-width: 5rem;
 }
 
-.Chat-form {
+.Chat .Form {
   bottom: 1rem;
-  position: fixed;
   height: 3rem;
-  width: 80vw;
   display: flex;
+  width: 100%;
+  padding: 0;
 }
 
-.Chat-input {
+.Chat .Form input {
+  margin-right: .5rem;
   flex-grow: 3;
+  font-size: 1rem;
+  padding: 0 .5rem;
 }
 
-.Chat-button {
+.Chat .Button {
+  background-color: #072A40;
+  color: white;
+  font-size: 1rem;
   flex-grow: 1;
+}
+
+@media only screen and (max-width: 824px) {
+  .Chat {
+    width: 100vw;
+  }
 }

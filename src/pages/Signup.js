@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Button from '../components/Button';
+import Form from '../components/Form';
 import { signup, signInWithGoogle } from '../helpers/auth';
 
-import '../styles/Singup.css';
-import '../styles/Form.css';
+import '../styles/Signup.css';
 
 const Signup = () => {
   const [error, setError] = useState(null);
@@ -33,11 +34,11 @@ const Signup = () => {
 
   return (
     <div className='Signup'>
-      <form className='Form' onSubmit={ handleSubmit }>
-        <h1>
-          Sign up to <Link to='/'>Refire Chat</Link>
-        </h1>
-        <div className='Form-inputs'>
+      <h1>Refire Chat</h1>
+      <Form
+        onSubmitHandler={ handleSubmit }
+        error={ error }
+        inputs={[
           <input
             className='Form-input'
             placeholder='First Name'
@@ -45,7 +46,7 @@ const Signup = () => {
             type='text'
             onChange={ event => setFirstName(event.target.value) }
             value={ firstName }
-          />
+          />,
           <input
             className='Form-input'
             placeholder='Last Name'
@@ -53,44 +54,38 @@ const Signup = () => {
             type='text'
             onChange={ event => setLastName(event.target.value) }
             value={ lastName }
-          />
+          />,
           <input
-            className='Form-input'
             placeholder='Email'
             name='email'
             type='email'
             onChange={ event => setEmail(event.target.value) }
             value={ email }
-          />
+          />,
           <input
-            className='Form-input'
             placeholder='Password'
             name='password'
             onChange={ event => setPassword(event.target.value) }
             value={ password }
             type='password'
           />
-        </div>
-        <div className='Form-buttons'>
-          <button
-            className='Form-button'
+        ]}
+        buttons={[
+          <Button
+            text='Sign Up'
             type='submit'
             disabled={ !(firstName && lastName && email && password) }
-          >
-            Sign up
-          </button>
-          <button
-            className='Form-button'
+          />,
+          <Button
             onClick={ googleSignIn }
             type="button"
           >
             Sign up with <img src='./google.png' alt='google' />
-          </button>
-        </div>
-        { error ? <p className='Form-error'>{ error }</p> : null }
-        <p>Already have an account? <Link to='/login'>Login</Link></p>
-      </form>
-    </div>
+          </Button>
+        ]}
+      />
+      <p>Already have an account? <Link to='/login'>Login</Link></p>
+  </div>
   );
 }
 

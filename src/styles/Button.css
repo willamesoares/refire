@@ -1,0 +1,14 @@
+.Button {
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 3rem;
+  justify-content: center;
+  min-width: 6rem;
+  padding: .3rem 1rem;
+}
+
+.Button:disabled {
+  cursor: not-allowed;
+}
