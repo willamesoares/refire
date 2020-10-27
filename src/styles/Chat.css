@@ -45,14 +45,17 @@
   padding: 0;
 }
 
-.Chat .Form input {
+.Chat .Form textarea {
   border: 1px solid gray;
   border-radius: 0;
   box-shadow: none;
+  font-family: inherit;
   margin-right: .5rem;
   flex-grow: 3;
   font-size: 1rem;
-  padding: 0 .5rem;
+  padding: .5rem;
+  overflow-wrap: break-word;
+  resize: none;
 }
 
 .Chat .Button {

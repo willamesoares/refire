@@ -90,7 +90,7 @@ const Chat = () => {
         onSubmitHandler={ handleSubmit }
         error={ readError || writeError }
       >
-        <input
+        <textarea
           onChange={ event => setContent(event.target.value) }
           value={ content }
         />
