@@ -38,11 +38,12 @@
 }
 
 .Chat .Form {
+  align-items: center;
   bottom: 1rem;
   height: 3rem;
   display: flex;
   width: 100%;
-  padding: 0;
+  padding: .5rem 0;
 }
 
 .Chat .Form textarea {
@@ -53,6 +54,7 @@
   margin-right: .5rem;
   flex-grow: 3;
   font-size: 1rem;
+  height: 3rem;
   padding: .5rem;
   overflow-wrap: break-word;
   resize: none;

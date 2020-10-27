@@ -4,7 +4,7 @@ import '../styles/Form.css';
 
 const Form = ({
   buttons = [],
-  className,
+  className = '',
   error,
   inputs = [],
   onSubmitHandler,
