@@ -74,18 +74,7 @@ const Chat = () => {
         { chats.map(chat => {
           return (
             <div
-              className='Chat-message'
-              style={{
-                ...(user.uid === chat.uid ? {
-                  alignSelf: 'flex-end',
-                  backgroundColor: '#79afe6',
-                  marginRight: '0.5rem',
-                  textAlign: 'right'
-                } : {
-                  alignSelf: 'flex-start',
-                  backgroundColor: '#babfc5'
-                })
-              }}
+              className={`Chat-message Chat-message--${user.uid === chat.uid ? 'mine' : 'theirs'}`}
             >
               { user.uid !== chat.uid ? (
                 <small><strong>{ chat.userDisplayName }</strong></small>

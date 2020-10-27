@@ -12,7 +12,7 @@
 .Chat-content {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden auto;
   margin-bottom: 1rem;
 }
 
@@ -22,6 +22,19 @@
   margin-top: 1rem;
   max-width: 50%;
   min-width: 5rem;
+  word-break: break-word;
+}
+
+.Chat-message--mine {
+  align-self: flex-end;
+  background-color: #79afe6;
+  margin-right: .5rem;
+  text-align: right;
+}
+
+.Chat-message--theirs {
+  align-self: flex-start;
+  background-color: #babfc5;
 }
 
 .Chat .Form {
@@ -33,6 +46,9 @@
 }
 
 .Chat .Form input {
+  border: 1px solid gray;
+  border-radius: 0;
+  box-shadow: none;
   margin-right: .5rem;
   flex-grow: 3;
   font-size: 1rem;
@@ -49,5 +65,11 @@
 @media only screen and (max-width: 824px) {
   .Chat {
     width: 100vw;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .Chat-message--mine {
+    margin-right: 0;
   }
 }
